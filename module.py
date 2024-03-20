@@ -1,12 +1,8 @@
 """
 @brief generates directories and files for a new module.
 @class Module
-@param module_name: the name of the module to be created.
+@param module_names: the names of the modules to be created.
 @returns None
-
-@note
-Time: O(n^2)
-Space: O(n)
 
 @details
 usage: make_mod.py <module_name>
@@ -53,17 +49,17 @@ class Module:
     """
     def __init__(self, module_names:list[str]) -> None:
         self.dir_structure:dict = {
-            "module_names": module_names,
+            "module_names": tuple(module_names),
             "directories": {
-                "data": ["raw", "processed", "output"],
-                "docs": ["api", "design", "notes", "reports"],
-                "assets": ["images", "text"],
-                "src": ["components", "models", "utils", "include"],
-                "tests": ["unit", "integration", "e2e"],
-                "scripts": ["js", "py"],
-                "tools": ["build", "deploy"]
+                "data": ("raw", "processed", "output"),
+                "docs": ("api", "design", "notes", "reports"),
+                "assets": ("images", "text"),
+                "src": ("components", "models", "utils", "include"),
+                "tests": ("unit", "integration", "e2e"),
+                "scripts": ("js", "py"),
+                "tools": ("build", "deploy")
             },
-            "files": ["README.md", "CONTRIBUTING.md", "LICENSE", "package.json", ".gitignore"]
+            "files": ("README.md", "CONTRIBUTING.md", "LICENSE", "package.json", ".gitignore")
         }
     def create_module(self, module_name:str) -> bool:
         """
