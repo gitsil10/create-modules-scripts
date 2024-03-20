@@ -1,2 +1,5 @@
-#ignore text files
-*.txt
+#ignore log files
+*.log
+
+#ignore virtual environment
+.venv
