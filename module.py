@@ -157,6 +157,18 @@ class Module:
         outputs success or failure of module creation.
         """
         for module in self.dir_structure.get('module_names'):
-            print(f"Creating module {module} has {'succeeded' if self.create_module(module) else 'failed'}")
-            print(f"Creating subdirectories for {module} has {'succeeded' if self.create_subdirectories(module) else 'failed'}")
-            print(f"Creating files for {module} has {'succeeded' if self.create_files(module) else 'failed'}")
+            self.log(f"Creating module {module} has {'succeeded' if self.create_module(module) else 'failed'}")
+            self.log(f"Creating subdirectories for {module} has {'succeeded' if self.create_subdirectories(module) else 'failed'}")
+            self.log(f"Creating files for {module} has {'succeeded' if self.create_files(module) else 'failed'}")
+
+    def log(self, message:str) -> None:
+        """
+        @brief logs a message
+        @param message: the message to log
+        @returns None
+
+        @details
+        logs the message to the console
+        """
+        with open('log.txt', 'a') as f:
+            f.write(f'{datetime.now()}\t{message}\n')
