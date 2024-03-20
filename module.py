@@ -157,11 +157,11 @@ class Module:
         outputs success or failure of module creation.
         """
         for module in self.dir_structure.get('module_names'):
-            self.log(f"Creating module {module} has {'succeeded' if self.create_module(module) else 'failed'}")
-            self.log(f"Creating subdirectories for {module} has {'succeeded' if self.create_subdirectories(module) else 'failed'}")
-            self.log(f"Creating files for {module} has {'succeeded' if self.create_files(module) else 'failed'}")
+            self.log(module, f"Creating module {module} has {'succeeded' if self.create_module(module) else 'failed'}")
+            self.log(module, f"Creating subdirectories for {module} has {'succeeded' if self.create_subdirectories(module) else 'failed'}")
+            self.log(module, f"Creating files for {module} has {'succeeded' if self.create_files(module) else 'failed'}")
 
-    def log(self, message:str) -> None:
+    def log(self, module_name:str, message:str) -> None:
         """
         @brief logs a message
         @param message: the message to log
@@ -170,5 +170,6 @@ class Module:
         @details
         logs the message to the console
         """
-        with open('log.txt', 'a') as f:
-            f.write(f'{datetime.now()}\t{message}\n')
+        if path.exists(module_name):
+            with open(f'{module_name}/module.log', 'a') as f:
+                f.write(f'{datetime.now()}\t{message}\n')
